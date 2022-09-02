@@ -1,3 +1,7 @@
 test_data.csv
 task_bewise.pdf
-.idea/
+.idea
+venv
+__pycache__
+test.py
+features.csv
