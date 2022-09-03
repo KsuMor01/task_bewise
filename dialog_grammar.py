@@ -3,8 +3,6 @@ from yargy.interpretation import fact
 from yargy.predicates import gram
 from yargy.pipelines import morph_pipeline
 
-from collections import OrderedDict
-
 import json
 
 Dialog = fact(
