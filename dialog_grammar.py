@@ -3,8 +3,6 @@ from yargy.interpretation import fact
 from yargy.predicates import gram
 from yargy.pipelines import morph_pipeline
 
-import json
-
 Dialog = fact(
     'Dialog',
     ['intro', 'manager', 'company', 'outro'],
@@ -16,7 +14,6 @@ INTRO = morph_pipeline([
     "доброе утро",
     "приветствую",
     "доброго времени суток"
-
 ])
 
 OUTRO = morph_pipeline([
@@ -30,6 +27,7 @@ Name = fact(
     'Name',
     ['first', 'last'],
 )
+
 Manager = fact(
     'Manager',
     ['prefix', 'name']
@@ -39,6 +37,7 @@ LAST = and_(
     gram('Surn'),
     not_(gram('Abbr')),
 )
+
 FIRST = and_(
     gram('Name'),
     not_(gram('Abbr')),
@@ -52,7 +51,6 @@ PREFIX = morph_pipeline([
     "меня",
     "это"
 ])
-
 
 NAME = or_(
     FIRST.interpretation(
@@ -75,7 +73,6 @@ MANAGER = rule(
 ).interpretation(
     Manager
 )
-
 
 Company = fact(
     'Company',
@@ -118,7 +115,6 @@ COMPANY = or_(
     Company
 )
 
-
 DIALOG = or_(
     INTRO.interpretation(
         Dialog.intro
@@ -150,9 +146,6 @@ def join_spans(text, spans):
         text[start:stop]
         for start, stop in spans
     )
-
-def show_json(data):
-    print(json.dumps(data, indent=2, ensure_ascii=False))
 
 
 def parse_dialog_line(line: str) -> list:
